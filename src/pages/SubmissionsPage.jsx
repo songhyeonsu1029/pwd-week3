@@ -69,15 +69,8 @@ function SubmissionsPage() {
 
   const approveMutation = useMutation({
     mutationFn: async (submission) => {
-      const payload = {
-        name: submission.restaurantName,
-        category: submission.category,
-        location: submission.location,
-        priceRange: submission.priceRange || undefined,
-        description: submission.review || undefined,
-        recommendedMenu: Array.isArray(submission.recommendedMenu) ? submission.recommendedMenu : undefined,
-      };
-      await restaurantAPI.createRestaurant(payload);
+      // 백엔드의 updateSubmission에서 자동으로 레스토랑을 생성하므로
+      // 여기서는 상태만 업데이트합니다.
       await submissionAPI.updateSubmission(submission.id, { status: 'approved' });
     },
     onSuccess: () => {
